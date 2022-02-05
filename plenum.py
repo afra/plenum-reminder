@@ -25,7 +25,7 @@ wiki = requests.get("https://afra-berlin.de/dokuwiki/doku.php?id=plenum&do=expor
 wikisource = wiki.content.decode('utf-8')
 
 date_match = re.search(r"\*\*Termin:\*\* [a-zA-Z]*, ([0-9]+).([0-9]+).([0-9]+),", wikisource)
-topics_match = re.search(r"\*\*Themen:\*\*\n(( .*\n)+)", wikisource)
+topics_match = re.search(r"\*\*(Themen|Topics):\*\*\n(( .*\n)+)", wikisource)
 
 
 if not date_match:
@@ -35,7 +35,7 @@ if not topics_match:
     raise Exception("Plenum topics could not be parsed.")
 
 next_plenum_date = datetime.date(year=int(date_match.group(3)), month=int(date_match.group(2)), day=int(date_match.group(1)))
-topics_text = topics_match.group(1)
+topics_text = topics_match.group(2)
 
 if len(topics_text) > 128 * 1024:
     raise Exception("Topic text seems a bit long.")
