@@ -25,7 +25,7 @@ wiki = requests.get("https://afra-berlin.de/dokuwiki/doku.php?id=plenum&do=expor
 wikisource = wiki.content.decode('utf-8')
 
 date_match = re.search(r"\*\*Termin:\*\* [a-zA-Z]*, ([0-9]+).([0-9]+).([0-9]+),", wikisource)
-topics_match = re.search(r"\*\*(Themen|Topics):\*\*\n(( .*\n)+)", wikisource)
+topics_match = re.search(r"\*\*(Themen|Topics):\*\*\n(( .*\n)*)", wikisource)
 
 
 if not date_match:
